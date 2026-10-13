@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Farmer's Market{% endblock %}</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            min-height: 100vh;
+        }
+        .navbar {
+            background: #2e7d32;
+            color: white;
+            padding: 14px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .navbar h2 { margin: 0; font-size: 20px; }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            background: #1b5e20;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-left: 6px;
+        }
+        .container { max-width: 800px; margin: 30px auto; padding: 0 15px; }
+        .card {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+        h3 { color: #2e7d32; margin-top: 0; }
+        label { font-size: 14px; font-weight: 600; display: block; margin-bottom: 5px; }
+        input, select {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        button, .btn {
+            display: inline-block;
+            padding: 11px 22px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        button:hover, .btn:hover { background: #1b5e20; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { text-align: left; padding: 10px; border-bottom: 1px solid #eee; font-size: 14px; }
+        th { color: #2e7d32; }
+        .error { background: #fdecea; color: #b71c1c; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 14px; }
+        .success { background: #e8f5e9; color: #1b5e20; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 14px; }
+        .muted { color: #777; font-size: 14px; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .verified { background: #c8e6c9; color: #1b5e20; }
+        .pending { background: #fff3e0; color: #e65100; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h2>🌾 Farmer's Market</h2>
+        <div>{% block nav %}{% endblock %}</div>
+    </div>
+    <div class="container">
+        {% if error %}<div class="error">{{ error }}</div>{% endif %}
+        {% if success %}<div class="success">{{ success }}</div>{% endif %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

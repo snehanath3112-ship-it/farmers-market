@@ -1,79 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Farmer Dashboard</title>
-    <style>
-        * { box-sizing: border-box; }
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-            min-height: 100vh;
-        }
-        .navbar {
-            background-color: #2e7d32;
-            color: white;
-            padding: 16px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .navbar h2 {
-            margin: 0;
-            font-size: 20px;
-        }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            background-color: #1b5e20;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-        .navbar a:hover {
-            background-color: #164a19;
-        }
-        .content {
-            max-width: 500px;
-            margin: 50px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-        }
-        .content h3 {
-            color: #2e7d32;
-            margin-top: 0;
-        }
-        .status {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        .verified { background-color: #c8e6c9; color: #1b5e20; }
-        .pending { background-color: #fff3e0; color: #e65100; }
-    </style>
-</head>
-<body>
-    <div class="navbar">
-        <h2>🌾 Farmer's Market</h2>
-        <a href="{% url 'farmer_logout' %}">Logout</a>
-    </div>
-
-    <div class="content">
-        <h3>Welcome, {{ farmer.name }}! 👋</h3>
-        <p><strong>Phone:</strong> {{ farmer.phone }}</p>
-        <p><strong>Village:</strong> {{ farmer.village }}</p>
-        <p>
-            <strong>Status:</strong>
-            {% if farmer.is_verified %}
-                <span class="status verified">Verified</span>
-            {% else %}
-                <span class="status pending">Verification Pending</span>
-            {% endif %}
-        </p>
-    </div>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Farmer Dashboard{% endblock %}
+{% block nav %}
+    <a href="{% url 'farmer_listings' %}">My Listings</a>
+    <a href="{% url 'farmer_logout' %}">Logout</a>
+{% endblock %}
+{% block content %}
+<div class="card">
+    <h3>Welcome, {{ farmer.name }}! 👋</h3>
+    <p><strong>Phone:</strong> {{ farmer.phone }}</p>
+    <p><strong>Village:</strong> {{ farmer.village }}</p>
+    <p><strong>Status:</strong>
+        {% if farmer.is_verified %}
+            <span class="badge verified">Verified</span>
+        {% else %}
+            <span class="badge pending">Verification Pending</span>
+        {% endif %}
+    </p>
+    <a class="btn" href="{% url 'farmer_listings' %}">Manage Produce Listings</a>
+</div>
+{% endblock %}
